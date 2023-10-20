@@ -153,24 +153,41 @@
          -->
 
         <div class="note-list" data-note-panel>
-            <h3 class="card-title text-title-medium">Note Title</h3>
 
-            <p class="card-text text-body-large">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, assumenda
-                amet ea reiciendis, eos facere quis, illo at tenetur saepe esse mollitia! Adipisci excepturi quia
-                provident, eveniet ab ipsam. Natus.</p>
+            <div class="card">
+                <h3 class="card-title text-title-medium">Note Title</h3>
 
-            <div class="wrapper">
-                <span class="cardd-time text-label-large">20 min ago</span>
+                <p class="card-text text-body-large">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
+                    assumenda
+                    amet ea reiciendis, eos facere quis, illo at tenetur saepe esse mollitia! Adipisci excepturi quia
+                    provident, eveniet ab ipsam. Natus.</p>
 
-                <button class="icon-btn large" aria-label="Delete note" data-tooltip="Delete note">
-                    <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+                <div class="wrapper">
+                    <span class="card-time text-label-large">20 min ago</span>
 
-                    <div class="state-layer"></div>
-                </button>
+                    <button class="icon-btn large" aria-label="Delete note" data-tooltip="Delete note">
+                        <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+
+                        <div class="state-layer"></div>
+                    </button>
+                </div>
             </div>
 
             <div class="state-layer"></div>
         </div>
+
+
+        <!-- 
+            - #FAB button for mobile
+         -->
+
+        <button class="fab" aria-label="New note" data-note-create-btn>
+            <span class="material-symbols-rounded" aria-hidden="true">add</span>
+
+            <div class="state-layer"></div>
+        </button>
+
+
     </main>
 
 </body>

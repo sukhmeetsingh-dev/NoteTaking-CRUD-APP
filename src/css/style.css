@@ -526,7 +526,28 @@ body {
  * FAB (Floating Action Button)
  */
 
+.fab {
+  height: 56px;
+  max-width: max-content;
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+  --state-layer-bg: var(--on-primary-container);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-inline: var(--spacing-4);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-1);
+  transition: box-shadow var(--tr-duration-short);
+}
 
+.fab:hover {
+  box-shadow: var(--shadow-2);
+}
+
+.fab .text {
+  padding-inline-end: var(--spacing-2);
+}
 
 /**
  * Card
@@ -548,6 +569,41 @@ body {
   border-color: var(--outline);
 }
 
+.card .card-title {
+  color: var(--on-surface);
+}
+
+.card .card-text {
+  color: var(--on-surface-variant);
+  margin-block: var(--spacing-4);
+  text-wrap: balance;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-start: auto;
+}
+
+.card .card-time {
+  color: var(--on-surface-variant);
+}
+
+.card .icon-btn {
+  opacity: 0;
+  transition: opacity var(--tr-duration-short) var(--tr-easing-linear);
+}
+
+.card:where(:hover, :focus-visible) .icon-btn {
+  opacity: 1;
+}
 
 /**
  * Modal
@@ -725,9 +781,21 @@ body {
   margin-block: var(--spacing-3);
 }
 
+.note-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-content: flex-start;
+  align-items: stretch;
+  gap: var(--spacing-2);
+}
 
-
-
+.main .fab {
+  position: fixed;
+  bottom: var(--spacing-4);
+  right: var(--spacing-4);
+  z-index: 2;
+}
 
 
 /*-----------------------------------*\
