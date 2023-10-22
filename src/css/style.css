@@ -735,9 +735,30 @@ body {
  * Tooltip
  */
 
+.tooltip {
+  position: fixed;
+  z-index: 4;
+  height: 24px;
+  display: grid;
+  align-items: center;
+  padding-inline: var(--spacing-2);
+  background-color: var(--inverse-surface);
+  color: var(--inverse-on-surface);
+  white-space: nowrap;
+  border-radius: var(--radius-extra-small);
+  pointer-events: none;
+  animation: fade var(--tr-duration-short) var(--tr-easing-linear) forwards;
+}
 
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
 
-
+  100% {
+    opacity: 1;
+  }
+}
 
 /*-----------------------------------*\
   #SIDEBAR
@@ -911,6 +932,22 @@ body {
   z-index: 2;
 }
 
+.empty-notes {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: var(--on-surface-variant);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.empty-notes .material-symbols-rounded {
+  font-size: 6.8rem;
+  opacity: 0.25;
+  margin-block-end: var(--spacing-4);
+  margin-inline: auto;
+}
 
 /*-----------------------------------*\
   #MEDIA QUERIES
