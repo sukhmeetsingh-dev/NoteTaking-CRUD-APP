@@ -1,5 +1,5 @@
 /**
- * @copyright codewithsadee 2023
+ * @copyright sukhmeet 2023
  */
 
 'use strict';
@@ -13,8 +13,7 @@
 
 
 const addEventOnElements = function ($elements, eventType ,callback) {
-    console.log($elements);
-    $elements.forEach($elements => $element.addEventListener(eventType,callback));
+    $elements.forEach($elements => $elements.addEventListener(eventType,callback));
 }
 
 export {

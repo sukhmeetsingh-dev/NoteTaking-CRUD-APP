@@ -20,7 +20,7 @@ const /** {Array<HTML Element>} */ $sidebarTogglers = document.querySelectorAll(
 
 const /** {HTML Element} */ $overlay = document.querySelector('[ data-sidebar-overlay]');
 
-addEventOnElements($sidebarTogglers, 'click', function(){
+addEventOnElements($sidebarTogglers, 'click', function(click) {
     $sidebar.classList.toggle('active');
     $overlay.classList.toggle('active');
 });
