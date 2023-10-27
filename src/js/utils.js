@@ -37,7 +37,31 @@ const getGreetingMsg = function (currentHour) {
 }
 
 
+let /** {HTMLElement | undefined} */ $lastActiveNavItem; 
+
+/**
+ * Activates a navigation item by adding the 'active' class and deactivates the previously active item.
+ */
+const activeNotebook = function () {
+    $lastActiveNavItem?.classList.remove('active');
+    this.classList.add('active');
+    $lastActiveNavItem = this;
+}
+
+
+/**
+ * Makes a DOM element editable by setting the 'contenteditable' attribute to true and focusing on it.
+ * 
+ * @param {HTMLElement} $element - The DOM element to make editable.
+ */
+const makeElemEditable = function ($element) {
+    $element.setAttribute('contenteditable', true);
+    $element.focus();
+}
+
 export {
     addEventOnElements,
-    getGreetingMsg
+    getGreetingMsg,
+    activeNotebook,
+    makeElemEditable
 }

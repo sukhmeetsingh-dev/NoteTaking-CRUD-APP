@@ -9,7 +9,11 @@
   * Module Import
   */
 
-import { addEventOnElements, getGreetingMsg } from "./utils.js";
+import { addEventOnElements, 
+  getGreetingMsg, 
+  activeNotebook, 
+  makeElemEditable
+ } from "./utils.js";
 import { Tooltip } from "./components/Tooltip.js";
 
 /**
@@ -22,9 +26,9 @@ const /** {Array<HTML Element>} */ $sidebarTogglers = document.querySelectorAll(
 
 const /** {HTML Element} */ $overlay = document.querySelector('[ data-sidebar-overlay]');
 
-addEventOnElements($sidebarTogglers, 'click', function(click) {
-    $sidebar.classList.toggle('active');
-    $overlay.classList.toggle('active');
+addEventOnElements($sidebarTogglers, 'click', function (click) {
+  $sidebar.classList.toggle('active');
+  $overlay.classList.toggle('active');
 });
 
 
@@ -52,3 +56,33 @@ $currentDateElem.textContent = new Date().toDateString().replace(' ', ', ');
 /**
  * Notebook Create field
  */
+const /** {HTMLElement} */ $sidebarList = document.querySelector('[data-sidebar-list]');
+const /** {HTMLElement} */ $addNotebookBtn = document.querySelector('[data-add-notebook]');
+
+/**
+ * Shows a notebook creation field in the sidebar when the "add notebook buttoon is clicked."
+ * The funciton dynamically adds a new notebook field element, makes it editable, and listens for
+ * the 'Enter' hey to create a new notebook when pressed.
+ */
+const showNotebookField = function () {
+  const /** {HTMLElement} */ $navItem = document.createElement('div');
+  $navItem.classList.add('nav-item');
+
+  $navItem.innerHTML = html`
+  <span class="text text-label-large" data-notebook-field></span>
+
+  <div class="state-layer"></div>
+  `;
+
+  $sidebarList.appendChild($navItem);
+
+  const /** {HTMLElement} */ $navItemField = $navItem.querySelector('[data-notebook-field]');
+
+  //active new created notebook and deactive the last one.
+  activeNotebook.call($navItem);
+
+  // Make notebook field content editable and focus
+  makeElemEditable($navItemField);
+}
+
+$addNotebookBtn.addEventListener('click', showNotebookField);
