@@ -9,11 +9,12 @@
   * Module Import
   */
 
-import { addEventOnElements, 
-  getGreetingMsg, 
-  activeNotebook, 
+import {
+  addEventOnElements,
+  getGreetingMsg,
+  activeNotebook,
   makeElemEditable
- } from "./utils.js";
+} from "./utils.js";
 import { Tooltip } from "./components/Tooltip.js";
 
 /**
@@ -56,7 +57,7 @@ $currentDateElem.textContent = new Date().toDateString().replace(' ', ', ');
 /**
  * Notebook Create field
  */
-const /** {HTMLElement} */ $sidebarList = document.querySelector('[data-sidebar-list]');
+const /** {HTMLElement} */ $sidebarList = document.querySelector('[data-slidebar-list]');
 const /** {HTMLElement} */ $addNotebookBtn = document.querySelector('[data-add-notebook]');
 
 /**
@@ -68,7 +69,7 @@ const showNotebookField = function () {
   const /** {HTMLElement} */ $navItem = document.createElement('div');
   $navItem.classList.add('nav-item');
 
-  $navItem.innerHTML = html`
+  $navItem.innerHTML = `
   <span class="text text-label-large" data-notebook-field></span>
 
   <div class="state-layer"></div>
