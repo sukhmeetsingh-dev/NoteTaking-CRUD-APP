@@ -18,7 +18,6 @@ import { Tooltip } from "./Tooltip.js";
  * @param {string} name - The name of the notebook.
  * @returns {HTMLElement} - An HTML element representing the navigation item for the notebook
  */
-
 export const NavItem = function (id, name) {
 
     const /** {HTMLElement} */ $navItem = document.createElement('div');
@@ -42,5 +41,10 @@ export const NavItem = function (id, name) {
 
         <div class="state-layer"></div>
     `;
+
+    // Show tooltip on edit and delete button
+    const /** {Array<HTMLElement>} */ $tooltipElems = $navItem.querySelectorAll('[data-tooltip]');
+    $tooltipElems.forEach($elem => Tooltip($elem));
+
     return $navItem;
 }
