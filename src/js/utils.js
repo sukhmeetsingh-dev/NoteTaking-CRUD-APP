@@ -59,9 +59,20 @@ const makeElemEditable = function ($element) {
     $element.focus();
 }
 
+
+/**
+ * Generates a unique ID based on the current timestamp.
+ * 
+ * @returns {string} A string representation of the current timestamp.
+ */
+const generateID = function ()  {
+    return new Date().getTime().toString();
+}
+
 export {
     addEventOnElements,
     getGreetingMsg,
     activeNotebook,
-    makeElemEditable
+    makeElemEditable,
+    generateID
 }

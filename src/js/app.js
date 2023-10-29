@@ -16,6 +16,9 @@ import {
   makeElemEditable
 } from "./utils.js";
 import { Tooltip } from "./components/Tooltip.js";
+import { db } from "./db.js";
+import { client } from "./client.js";
+
 
 /**
   * Toggle sidebar in small screen
@@ -84,6 +87,29 @@ const showNotebookField = function () {
 
   // Make notebook field content editable and focus
   makeElemEditable($navItemField);
+
+  // When user press 'Enter' then create notebook
+  $navItemField.addEventListener('keydown', createNotebook);
 }
 
 $addNotebookBtn.addEventListener('click', showNotebookField);
+
+
+/**
+ * Create new notebook
+ * Creates a new notebook when the 'Enter' key is pressed while editing a notebook name field.
+ * The new notebook is stored in the database.
+ * 
+ * @param {KeyboardEvent} event - The keyboard event that triggered notebook creation. 
+ */
+const createNotebook = function (event) {
+  if (event.key === 'Enter') {
+    
+    // Store new created notebook in database
+    const /** {Object} */ notebookData = db.post.notebook(this.textContent || 'Untitled')
+    this.parentElement.remove();
+
+    // Render navItem
+    client.notebook.create(notebookData);
+  }
+}
