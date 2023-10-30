@@ -7,7 +7,7 @@
 /**
  * Import Module
  */
-import { generateID } from "./utils.js";
+import { generateID, findNotebook } from "./utils.js";
 
 // DB object
 let /** {Object} */ notekeeperDB = {};
@@ -20,7 +20,7 @@ let /** {Object} */ notekeeperDB = {};
 const initDB = function () {
     const /** {JSON | undefined} */ db = localStorage.getItem('notekeeperDB');
 
-    if(db) {
+    if (db) {
         notekeeperDB = JSON.parse(db);
     } else {
         notekeeperDB.notebooks = [];
@@ -72,9 +72,9 @@ export const db = {
             readDB();
 
             const /** {Object} */ notebookData = {
-               id:generateID(),
-               name,
-               notes: [] 
+                id: generateID(),
+                name,
+                notes: []
             }
 
             notekeeperDB.notebooks.push(notebookData);
@@ -92,10 +92,31 @@ export const db = {
          * @function
          * @returns {Array<Object>} An array of notebook objects.
          */
-        notebook(){
+        notebook() {
             readDB();
 
             return notekeeperDB.notebooks;
         }
-    }
+    },
+
+    update: {
+
+        /**
+         * Updates the name of a notebook in the database.
+         * 
+         * @param {string} notebookId - The ID of the notebook to update. 
+         * @param {string} name - The new name of the notebook.
+         * @returns {Object} - The updated notebook object.
+         */
+        notebook(notebookId, name) {
+            readDB();
+
+            const /** {Object} */ notebook = findNotebook(notekeeperDB, notebookId);
+            notebook.name = name;
+
+            writeDB();
+
+            return notebook;
+        }
+    },
 }

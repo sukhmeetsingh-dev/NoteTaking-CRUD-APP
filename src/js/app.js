@@ -120,7 +120,7 @@ const createNotebook = function (event) {
  */
 const renderExistedNoteBook = function () {
   const /** {Array} */ notebookList = db.get.notebook();
-  client.notebook.read();
+  client.notebook.read(notebookList);
 }
 
 renderExistedNoteBook();

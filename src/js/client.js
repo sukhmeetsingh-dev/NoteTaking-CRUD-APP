@@ -46,7 +46,7 @@ export const client = {
          */
         read(notebookList) {
             notebookList.forEach((notebookData, index) => {
-                const /** {HTMLElements} */ $navItem =(notebookData.id, notebookData.name);
+                const /** {HTMLElements} */ $navItem =NavItem(notebookData.id, notebookData.name);
 
                 if(index === 0) {
                     activeNotebook.call($navItem);
@@ -55,6 +55,21 @@ export const client = {
 
                 $sidebarList.appendChild($navItem);
             });
+        },
+
+        /**
+         * Updates the UI to reflect changes in a notebook.
+         * 
+         * @param {String} notebookId - ID of the notebook to update. 
+         * @param {Object} notebookData - New data for the notebook.
+         */
+        update(notebookId, notebookData) {
+            const /** {HTMLElements} */ $oldNotebook = document.querySelector(`[data-notebook="${notebookId}"`);
+            const /** {HTMLElement} */ $newNotebook = NavItem(notebookData.id, notebookData.name);
+
+            $notePanelTitle.textContent = notebookData.name;
+            $sidebarList.replaceChild($newNotebook, $oldNotebook);
+            activeNotebook.call($newNotebook);
         }
 
     }

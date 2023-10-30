@@ -4,10 +4,17 @@
 
 'use strict';
 
+
 /**
  * Import
- */
+*/
 import { Tooltip } from "./Tooltip.js";
+import { activeNotebook, makeElemEditable } from "../utils.js";
+import { db } from "../db.js";
+import { client } from "../client.js";
+
+
+const /** {HTMLElement} */ $notePanelTitle = document.querySelector('[data-note-panel-title]');
 
 
 /**
@@ -46,5 +53,41 @@ export const NavItem = function (id, name) {
     const /** {Array<HTMLElement>} */ $tooltipElems = $navItem.querySelectorAll('[data-tooltip]');
     $tooltipElems.forEach($elem => Tooltip($elem));
 
+    /** 
+     * Handles the click event on the navigation item. Updates the note panel's title, retrieves the associated notes,
+     * and marks the item as active.
+     */
+
+    $navItem.addEventListener('click', function(){
+        $notePanelTitle.textContent = name;
+        activeNotebook.call(this);
+    });
+
+
+/**
+ * Notebook edit functionality
+ */
+    const /** {HTMLElement} */ $navItemEditBtn = $navItem.querySelector('[data-edit-btn]');
+    const /** {HTMLElement} */ $navItemField = $navItem.querySelector('[data-notebook-field]');
+    $navItemEditBtn.addEventListener('click',makeElemEditable.bind(null, $navItemField));
+
+    $navItemField.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            this.removeAttribute('contenteditable');
+
+            // Update edited data in database
+            const updatedNotebookData = db.update.notebook(id, this.textContent);
+
+            // Render updated notebook
+            client.notebook.update(id, updatedNotebookData);
+        }
+    });
+
+
+
+    /**
+     * Notebook delete function
+     */
+    
     return $navItem;
 }
