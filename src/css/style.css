@@ -548,7 +548,7 @@ body {
 .fab {
   height: 56px;
   max-width: max-content;
-  background-color: var(--primary-container);
+  background-color: var(--primary);
   color: var(--on-primary-container);
   --state-layer-bg: var(--on-primary-container);
   display: flex;

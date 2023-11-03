@@ -20,19 +20,19 @@ const DeleteConfirmModal = function (title) {
     const /** {HTMlElements} */ $modal = document.createElement('div');
     $modal.classList.add('modal');
 
-    $modal.innerHTML = `
+    $modal.innerHTML =  `
       <h3 class="mdoal-title text-title-medium">
         Are you sure you want to delete <strong>"${title}"</strong>?
       </h3>
 
       <div class="modal-footer">
-        <button class="btn text" data-action-btn="false">
+        <button class="btn text" data-action-btn = "false" >
             <span className="text-label-large">Cancel</span>
 
             <div className="state-layer"></div>
         </button>
 
-        <button class="btn fill" data-action-btn="true">
+        <button class ="btn fill" data-action-btn = "true" >
             <span className="text-label-large">Delete</span>
 
             <div class="state-layer"></div>
@@ -60,6 +60,7 @@ const DeleteConfirmModal = function (title) {
 
 
     const /** {Array<HTMlElements>} */ $actionBtns = $modal.querySelectorAll('[data-action-btn]');
+    
     /**
      * Handles the submission of the delete confirmation.
      * 
@@ -68,7 +69,7 @@ const DeleteConfirmModal = function (title) {
     const onSubmit = function (callback) {
         $actionBtns.forEach($btn => $btn.addEventListener('click', function() {
 
-            const /** {Boolean} */ isConfirm = this.dataset.$actionBtn === 'true' ? true : false;
+            const /** {Boolean} */ isConfirm = this.dataset.actionBtn === 'true' ? true : false;
 
             callback(isConfirm);
         }));
