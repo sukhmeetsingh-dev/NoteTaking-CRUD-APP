@@ -70,6 +70,18 @@ export const client = {
             $notePanelTitle.textContent = notebookData.name;
             $sidebarList.replaceChild($newNotebook, $oldNotebook);
             activeNotebook.call($newNotebook);
+        },
+
+        /**
+         * Deletes a notebook from the UI.
+         * 
+         * @param {String} notebookId - ID of the notebook to delete. 
+         */
+        delete(notebookId) {
+            const /**{HTMLElement} */ $deletedNotebook = document.querySelector(`[data-notebook="${notebookId}"]`);
+            const /** {HTMLElement | null} */ $acativeNavItem = $deletedNotebook.nextElementSibling ?? $deletedNotebook.previousElementSibling;
+
+            $deletedNotebook.remove();
         }
 
     }

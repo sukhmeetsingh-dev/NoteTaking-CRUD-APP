@@ -9,9 +9,9 @@
  * Manages the theme setting in the DOM and Local storage.
  */
 const toggleTheme = function () {
-    const /** {string} */ currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const /** {string} */ currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const /** {string} */ newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
+    localStorage.setItem('theme', newTheme);
     document.documentElement.setAttribute('data-theme',newTheme);
 }
 /**
