@@ -14,6 +14,7 @@ import { activeNotebook } from "./utils.js";
 
 const /** {HTMLElement} */ $sidebarList = document.querySelector('[data-slidebar-list]')
 const /** {HTMLElement} */ $notePanelTitle = document.querySelector('[data-note-panel-title]');
+const /** {HTMLElement} */ $notePanel = document.querySelector('[data-note-panel]');
 
 
 /**
@@ -80,6 +81,14 @@ export const client = {
         delete(notebookId) {
             const /**{HTMLElement} */ $deletedNotebook = document.querySelector(`[data-notebook="${notebookId}"]`);
             const /** {HTMLElement | null} */ $acativeNavItem = $deletedNotebook.nextElementSibling ?? $deletedNotebook.previousElementSibling;
+
+            if($acativeNavItem) {
+                $acativeNavItem.click();
+            }
+            else {
+                $notePanelTitle.innerHTML = '';
+                // $notePanel.innerHTML = '';
+            }
 
             $deletedNotebook.remove();
         }
