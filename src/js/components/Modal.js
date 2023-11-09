@@ -31,18 +31,18 @@ const NoteModal = function (title = 'Untitled', text = 'Add your note ...', time
 
         </button>
 
-            <input type="text" placeholder="Untitled" value="${title}" class="modal-title text-title-medium" data-note-field>
+        <input type="text" placeholder="Untitled" value="${title}" class="modal-title text-title-medium" data-note-field>
 
-            <textarea class="modal-text text-body-large custom-scrollbar" placeholder="Take a note...">${text}</textarea>
+        <textarea class="modal-text text-body-large custom-scrollbar" placeholder="Take a note..."data-note-field>${text}</textarea>
 
-            <div class="modal-footer">
-                <span class="time text-label-large">${time}</span>
-                <button class="btn text" data-submit-btn>
-                    <span class="text-label-large">Save</span>
-                    
-                    <div class="state-layer"></div>
-                </button>
-            </div>
+        <div class="modal-footer">
+            <span class="time text-label-large">${time}</span>
+            <button class="btn text" data-submit-btn>
+                <span class="text-label-large">Save</span>
+                
+                <div class="state-layer"></div>
+            </button>
+        </div>
     `;
 
     const /** {HTMLElement} */ $submitBtn = $modal.querySelector('[data-submit-btn]');
@@ -79,7 +79,26 @@ const NoteModal = function (title = 'Untitled', text = 'Add your note ...', time
     const /** {HTMLElement} */ $closeBtn = $modal.querySelector('[data-close-btn]');
     $closeBtn.addEventListener('click', close);
 
-    return { open, close }
+
+    /**
+     * Handles the submission of a note within the modal.
+     * 
+     * @param {Function} callback - The callback function to execute with the submitted note data. 
+     */
+    const onSubmit = function (callback) {
+
+        $submitBtn.addEventListener('click',function () {
+            const /** {Object} */ noteData = {
+                title: $titleField.value,
+                text: $textField.value
+            }
+
+            callback(noteData);
+        });
+
+    }
+
+    return { open, close, onSubmit }
 }
 
 

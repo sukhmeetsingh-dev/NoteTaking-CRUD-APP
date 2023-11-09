@@ -140,4 +140,13 @@ addEventOnElements($noteCreateBtns, 'click', function () {
   //Create and open a new modal
   const /** {Object} */ modal = NoteModal();
   modal.open();
+
+  // Handle the submission of the new note to the database and client
+  modal.onSubmit(noteObj => {
+    const /** {String} */ activeNotebookId = document.querySelector('[data-notebook].active').dataset.notebook;
+
+    const /** {Object} */ noteData = db.post.note(activeNotebookId, noteObj);
+    client.note.create(noteData);
+    modal.close();
+  })
 });
