@@ -58,10 +58,13 @@ export const NavItem = function (id, name) {
      * Handles the click event on the navigation item. Updates the note panel's title, retrieves the associated notes,
      * and marks the item as active.
      */
-
     $navItem.addEventListener('click', function(){
         $notePanelTitle.textContent = name;
         activeNotebook.call(this);
+
+        const /** {Array} */ noteList = db.get.note(this.dataset.notebook);
+        client.note.read(noteList);
+        
     });
 
 
@@ -83,7 +86,6 @@ export const NavItem = function (id, name) {
             client.notebook.update(id, updatedNotebookData);
         }
     });
-
 
 
     /**
