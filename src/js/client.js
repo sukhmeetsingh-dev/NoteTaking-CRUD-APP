@@ -155,8 +155,19 @@ export const client = {
                 $notePanel.innerHTML = emptyNotesTemplate;
             }
 
-        }
+        },
 
+        /**
+         * Updates a note card in the UI based on provided note data.
+         * 
+         * @param {String} noteId - ID of the note to update.
+         * @param {Object} noteData - New data for the note.
+         */
+        update(noteId, noteData) {
+            const /** {HTMLElement} */ $oldCard = document.querySelector(`[data-note="${noteId}"]`);
+            const /** {HTMLElement} */ $newCard = Card(noteData);
+            $notePanel.replaceChild($newCard, $oldCard);
+        }
     }
 
 }

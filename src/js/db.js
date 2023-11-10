@@ -7,7 +7,7 @@
 /**
  * Import Module
  */
-import { generateID, findNotebook, findNotebookIndex } from "./utils.js";
+import { generateID, findNotebook, findNotebookIndex, findNote } from "./utils.js";
 
 // DB object
 let /** {Object} */ notekeeperDB = {};
@@ -157,7 +157,27 @@ export const db = {
             writeDB();
 
             return notebook;
+        },
+
+        /**
+         * Updates the name of a notebook in the database.
+         * 
+         * @function
+         * @param {string} noteId - The ID of the note to update.
+         * @param {Object} object - The updated data for the note.
+         * @returns {Object} The updated note object.
+         */
+        note(noteId, object) {
+            readDB();
+
+            const /** {Object} */ oldNote = findNote(notekeeperDB, noteId);
+            const /** {Object} */ newNote = Object.assign(oldNote, object);
+
+            writeDB();
+
+            return newNote;
         }
+
     },
 
     delete: {

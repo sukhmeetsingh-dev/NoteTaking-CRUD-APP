@@ -111,6 +111,22 @@ const getRelativeTime = function (milliseconds) {
     return minute < 1 ? 'Just now' : minute < 60 ? `${minute} min ago` : hour < 24 ? `${hour} hour ago` : `${day} day ago`;
 }
 
+/**
+ * Finds a specific note by its ID within a database of notebooks and their notes.
+ * 
+ * @param {Object} db - The database containing notebooks and notes.
+ * @param {String} noteId - The ID of the note to find.
+ * @returns {Object | undefined} - The found note object , or undefined if not found.
+ */
+const findNote = (db, noteId) => {
+    let note;
+    for (const notebook of db.notebooks) {
+        note = notebook.notes.find(note => note.id === noteId);
+        if (note) break;
+    }
+    return note;
+}
+
 
 export {
     addEventOnElements,
@@ -120,5 +136,6 @@ export {
     generateID,
     findNotebook,
     findNotebookIndex,
-    getRelativeTime
+    getRelativeTime,
+    findNote
 }
