@@ -7,7 +7,7 @@
 /**
  * Import Module
  */
-import { generateID, findNotebook, findNotebookIndex, findNote } from "./utils.js";
+import { generateID, findNotebook, findNotebookIndex, findNote, findNoteIndex } from "./utils.js";
 
 // DB object
 let /** {Object} */ notekeeperDB = {};
@@ -195,6 +195,27 @@ export const db = {
 
             writeDB();
         }
+    },
+
+    /**
+     * Deletes a note from a specified notebook in the database.
+     * 
+     * @function
+     * @param {String} notebookId - The ID of the notebook containing the note to delete.
+     * @param {String} noteId - The ID of the note to delete.
+     * @returns {Array<Object>} An array of remaining notes in the notebook.
+     */
+    note(notebookId, noteId) {
+        readDB();
+
+        const /** {Object} */ notebook = findNotebook(notekeeperDB, notebookId);
+        const /** {Number} */ noteIndex = findNoteIndex(notebook, noteId);
+
+        notebook.notes.splice(noteIndex, 1);
+
+        writeDB();
+
+        return notebook.notes;
     }
 
 }
