@@ -86,11 +86,11 @@ export const Card = function (noteData) {
 
             if (isConfirm) {
                 const /** {Array} */ existedNotes = db.delete.note(notebookId, id);
-                console.log(existedNotes);
                 // Update the client UI to reflect note deletion
                 client.note.delete(id, existedNotes.length);
             }
 
+            modal.close();
         });
 
     });
